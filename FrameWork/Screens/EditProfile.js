@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export function Homescreen() {
+export function EditProfile() {
     return (
         <View>
-            <Text>Homescreen</Text>
+            <Text>EditProfile</Text>
         </View>
     )
 }
