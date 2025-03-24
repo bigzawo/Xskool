@@ -7,8 +7,9 @@ import {
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 import { AppProvider } from "./global/globalVariables";
+import { Preloader } from "./FrameWork/Components/Preloader";
 import { RootSiblingParent } from "react-native-root-siblings";
-//import { Fascinate_400Regular } from "@expo-google-fonts/fascinate"
+import { Fascinate_400Regular } from "@expo-google-fonts/fascinate"
 import { Login } from "./FrameWork/Screens/Login";
 
 
@@ -60,7 +61,7 @@ export default function App() {
         >
           {/* <StackNavigator /> */}
           <Login />
-          { /*<Preloader / */}
+          <Preloader />
         </KeyboardAvoidingView>
       </AppProvider>
     </RootSiblingParent>
