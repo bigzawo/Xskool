@@ -54,7 +54,7 @@ export function Login({ navigation }) {
                     <ScrollView contentContainerStyle={styles.scrollView}>
                         <View style={styles.logoContainer}>
                             <Image
-                                source={require("../../assets/logo.jpg")}
+                                source={require("../../assets/Xskool-v-gold.png")}
                                 style={styles.logo}
                                 resizeMode="contain"
                             />

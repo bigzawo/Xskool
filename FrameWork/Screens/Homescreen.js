@@ -1,5 +1,5 @@
 
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, Platform } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, Platform, Dimensions } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
     faBook, faDownload, faBookOpen, faFilm,
@@ -10,9 +10,22 @@ import { Theme } from '../Components/Theme';
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Profile } from './Profile';
+import Carousel from 'react-native-reanimated-carousel';
 //import { Courses } from './Courses';
 
+
+
+const carouselLinks = [
+    "https://delete-accound.profiterworld.com/app-carousel-img/slide1.png",
+    "https://delete-accound.profiterworld.com/app-carousel-img/slide2.png",
+    "https://delete-accound.profiterworld.com/app-carousel-img/slide3.png",
+    "https://delete-accound.profiterworld.com/app-carousel-img/slide4.png",
+    "https://delete-accound.profiterworld.com/app-carousel-img/slide5.png",
+];
+
 function Home() {
+    const screenWidth = Dimensions.get("screen").width
+
     return (
         <SafeAreaView style={styles.container}>
             {/* Header Section */}
@@ -21,9 +34,24 @@ function Home() {
                     source={require("../../assets/Xskool-v-gold.png")}
                     style={styles.logo}
                 />
-                <Text style={styles.welcomeText}>
-                    Welcome to XSkool: Learn, Grow, Explore!
-                </Text>
+                <View>
+                    <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18 }}>John Wick</Text>
+                    <Text style={styles.welcomeText}>Learn, Grow, Explore!</Text>
+                </View>
+            </View>
+            <View style={{ marginVertical: 10, paddingHorizontal: 20 }}>
+                <Carousel
+                    loop
+                    width={screenWidth - 40}
+                    height={170}
+                    autoPlay={true}
+                    data={carouselLinks}
+                    style={{ borderRadius: 10 }}
+                    scrollAnimationDuration={2000}
+                    renderItem={({ index }) => (
+                        <Image style={{ width: '100%', height: 170, borderRadius: 10, }} source={{ uri: carouselLinks[index] }} defaultSource={require("../../assets/slide4.png")} />
+                    )}
+                />
             </View>
 
             {/* Grid Menu Section */}
@@ -66,22 +94,23 @@ const styles = StyleSheet.create({
         paddingTop: 20,
     },
     headerContainer: {
+        flexDirection: "row",
+        gap: 5,
         alignItems: 'center',
         marginBottom: 20,
         paddingHorizontal: 20,
     },
     logo: {
-        height: 180,
-        width: 180,
-        borderRadius: 30,
-        marginBottom: 15,
+        height: 70,
+        width: 70,
+        borderRadius: 50,
+        borderWidth: 1,
+        borderColor: Theme.colors.line
     },
     welcomeText: {
-        fontSize: 18,
-        color: '#333',
-        textAlign: 'center',
+        fontSize: 17,
+        color: Theme.colors.gray,
         fontFamily: Theme.fonts.text600,
-        marginBottom: 10,
     },
     gridContainer: {
         flexDirection: 'row',
@@ -145,8 +174,8 @@ export function HomeScreen() {
             })}
         >
             <Tab.Screen name='Home' component={Home} />
-                {/*<Tab.Screen name='Courses' component={Courses} */}
-           {/* <Tab.Screen name='Profile' component={Profile} />*/}
+            {/*<Tab.Screen name='Courses' component={Courses} */}
+            {/* <Tab.Screen name='Profile' component={Profile} />*/}
         </Tab.Navigator>
     )
 }
