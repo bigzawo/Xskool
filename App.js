@@ -6,11 +6,15 @@ import {
 } from "@expo-google-fonts/montserrat"
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
+//import { Preloader } from "./Framework/Components/Preloader";
 import { AppProvider } from "./global/globalVariables";
-import { Preloader } from "./FrameWork/Components/Preloader";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { Fascinate_400Regular } from "@expo-google-fonts/fascinate"
+import { Homescreen } from "./FrameWork/Screens/Homescreen";
+import { Intro } from "./FrameWork/Screens/Intro";
 import { Login } from "./FrameWork/Screens/Login";
+import { StackNavigator } from "./FrameWork/Navigators/Stack";
+
 
 
 LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native, along with all other PropTypes. We recommend that you migrate away from PropTypes and switch to a type system like TypeScript. If you need to continue using ViewPropTypes, migrate to the 'deprecated-react-native-prop-types' package."])
@@ -59,9 +63,9 @@ export default function App() {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
           style={{ flex: 1 }}
         >
-          {/* <StackNavigator /> */}
-          <Login />
-          <Preloader />
+
+          <StackNavigator />
+          {/*<Preloader />*/}
         </KeyboardAvoidingView>
       </AppProvider>
     </RootSiblingParent>
