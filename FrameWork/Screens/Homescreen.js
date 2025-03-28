@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Profile } from './Profile';
 import Carousel from 'react-native-reanimated-carousel';
-//import { Courses } from './Courses';
+import { Courses } from './Courses';
 
 
 
@@ -35,7 +35,7 @@ function Home() {
                     style={styles.logo}
                 />
                 <View>
-                    <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18 }}>John Wick</Text>
+                    <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18,   }}>John Wick</Text>
                     <Text style={styles.welcomeText}>Learn, Grow, Explore!</Text>
                 </View>
             </View>
@@ -105,12 +105,15 @@ const styles = StyleSheet.create({
         width: 70,
         borderRadius: 50,
         borderWidth: 1,
-        borderColor: Theme.colors.line
+        borderColor: Theme.colors.line,
+        marginTop:20,
     },
     welcomeText: {
         fontSize: 17,
         color: Theme.colors.gray,
         fontFamily: Theme.fonts.text600,
+        
+        
     },
     gridContainer: {
         flexDirection: 'row',
@@ -174,7 +177,7 @@ export function HomeScreen() {
             })}
         >
             <Tab.Screen name='Home' component={Home} />
-            {/*<Tab.Screen name='Courses' component={Courses} */}
+            <Tab.Screen name='Courses' component={Courses} />
             {/* <Tab.Screen name='Profile' component={Profile} />*/}
         </Tab.Navigator>
     )

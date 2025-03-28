@@ -14,6 +14,7 @@ import { Homescreen } from "./FrameWork/Screens/Homescreen";
 import { Intro } from "./FrameWork/Screens/Intro";
 import { Login } from "./FrameWork/Screens/Login";
 import { StackNavigator } from "./FrameWork/Navigators/Stack";
+import { Courses } from "./FrameWork/Screens/Courses";
 
 
 
@@ -64,6 +65,7 @@ export default function App() {
           style={{ flex: 1 }}
         >
 
+      {/*<Courses />*/}
           <StackNavigator />
           {/*<Preloader />*/}
         </KeyboardAvoidingView>
