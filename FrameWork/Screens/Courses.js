@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, Platform, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, ScrollView, TouchableOpacity, Image, View, Platform, Dimensions } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
     faBook, faDownload, faBookOpen, faFilm,
@@ -29,6 +29,7 @@ export function Courses() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView>
       <View>
                     <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 20, paddingTop:15, margin:15 }}>AVAILABLE COURSES</Text>
                     <Text style={styles.welcomeText}>Learn, Grow, Explore!</Text>
@@ -75,6 +76,7 @@ export function Courses() {
                     </TouchableOpacity>
                 ))}
             </View>
+            </ScrollView>
         </SafeAreaView>
                 );
               }
@@ -99,22 +101,20 @@ export function Courses() {
                   paddingTop:-70,
               },
               gridContainer: {
-                  flexDirection: 'row',
-                  flexWrap: 'wrap',
-                  justifyContent: 'space-around',
-                  paddingHorizontal: 10,
+                flex: 1,
+                padding: 16,
+                backgroundColor: '#f4f4f4',
               },
               gridItem: {
-                  width: '30%',
-                  aspectRatio: 1,
-                  marginVertical: 7,
-                  borderRadius: 15,
-                  backgroundColor: '#F0F4F8',
-                  // shadowColor: '#000',
-                  // shadowOffset: { width: 0, height: 2 },
-                  // shadowOpacity: 0.1,
-                  // shadowRadius: 4,
-                  elevation: Platform.OS == "android" ? 5 : null,
+                backgroundColor: 'white',
+                padding: 16,
+                marginBottom: 8,
+                borderRadius: 8,
+                elevation: 2,
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 2,
               },
               gridItemContent: {
                   flex: 1,
