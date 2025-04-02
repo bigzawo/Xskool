@@ -33,7 +33,7 @@ const validation = yup.object({
 });
 
 
-export function Login({ navigation }) {
+export function Login({ navigation, route }) {
     const { setPreloader, setUserUID } = useContext(AppContext);
     const [showPassword, setShowPassword] = useState(false);
 

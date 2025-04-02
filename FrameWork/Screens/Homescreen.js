@@ -1,19 +1,20 @@
 
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, Platform, Dimensions } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, Image, View, Platform, Dimensions, Modal, Pressable } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
     faBook, faDownload, faBookOpen, faFilm,
     faPeopleGroup, faComment, faFunnelDollar,
-    faBarsProgress, faContactCard
+    faBarsProgress, faContactCard,
 } from '@fortawesome/free-solid-svg-icons';
 import { Theme } from '../Components/Theme';
-import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Profile } from './Profile';
+import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-reanimated-carousel';
 import { Courses } from './Courses';
-
-
+import { AppButton } from '../Components/AppButton';
+import { useContext, useState } from 'react';
+import { AppContext } from '../../global/globalVariables';
 
 const carouselLinks = [
     "https://delete-accound.profiterworld.com/app-carousel-img/slide1.png",
@@ -24,7 +25,10 @@ const carouselLinks = [
 ];
 
 function Home() {
+    const { userUID, setUserUID, courses, userInfo } = useContext(AppContext)
+    const [visibility, setVisibility] = useState(false)
     const screenWidth = Dimensions.get("screen").width
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -35,10 +39,11 @@ function Home() {
                     style={styles.logo}
                 />
                 <View>
-                    <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18,   }}>John Wick</Text>
+                    <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18 }}>John Wick {userUID}</Text>
                     <Text style={styles.welcomeText}>Learn, Grow, Explore!</Text>
                 </View>
             </View>
+
             <View style={{ marginVertical: 10, paddingHorizontal: 20 }}>
                 <Carousel
                     loop
@@ -70,7 +75,7 @@ function Home() {
                     <TouchableOpacity
                         key={index}
                         style={styles.gridItem}
-                    // You can add onPress handlers here later
+                        onPress={() => { setVisibility(true); setUserUID((Math.random() * 90000000).toFixed(2)) }}
                     >
                         <View style={styles.gridItemContent}>
                             <FontAwesomeIcon
@@ -83,6 +88,32 @@ function Home() {
                     </TouchableOpacity>
                 ))}
             </View>
+            <Modal
+                visible={visibility}
+                transparent={true}
+                animationType='slide'
+            >
+                <View style={{ flex: 1, backgroundColor: "#0000008b" }}>
+                    <Pressable onPress={() => setVisibility(false)} style={{ flex: 1 }}></Pressable>
+                    <View style={{ padding: 20, backgroundColor: "white", borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                        <View style={{ paddingBottom: 20, }}>
+                            <Carousel
+                                loop
+                                width={screenWidth - 40}
+                                height={170}
+                                autoPlay={true}
+                                data={carouselLinks}
+                                style={{ borderRadius: 10 }}
+                                scrollAnimationDuration={2000}
+                                renderItem={({ index }) => (
+                                    <Image style={{ width: '100%', height: 170, borderRadius: 10, }} source={{ uri: carouselLinks[index] }} defaultSource={require("../../assets/slide4.png")} />
+                                )}
+                            />
+                            <AppButton onPress={() => setVisibility(false)} style={{ marginTop: 20 }}>Close</AppButton>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -101,19 +132,16 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
     },
     logo: {
-        height: 70,
-        width: 70,
+        height: 50,
+        width: 50,
         borderRadius: 50,
         borderWidth: 1,
-        borderColor: Theme.colors.line,
-        marginTop:20,
+        borderColor: Theme.colors.line
     },
     welcomeText: {
-        fontSize: 17,
+        fontSize: 13,
         color: Theme.colors.gray,
         fontFamily: Theme.fonts.text600,
-        
-        
     },
     gridContainer: {
         flexDirection: 'row',
@@ -162,9 +190,6 @@ export function HomeScreen() {
                     else if (route.name === 'Courses') {
                         iconName = focused ? 'book' : 'file-tray-full-outline';
                     }
-                    else if (route.name === 'Cart') {
-                        iconName = focused ? 'cart' : 'cart-outline';
-                    }
                     else if (route.name === 'Profile') {
                         iconName = focused ? 'person' : 'person-outline';
                     }
@@ -178,7 +203,7 @@ export function HomeScreen() {
         >
             <Tab.Screen name='Home' component={Home} />
             <Tab.Screen name='Courses' component={Courses} />
-            {/* <Tab.Screen name='Profile' component={Profile} />*/}
+           
         </Tab.Navigator>
     )
 }

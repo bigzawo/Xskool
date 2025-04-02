@@ -65,8 +65,9 @@ export default function App() {
           style={{ flex: 1 }}
         >
 
-     {/* <Courses />*/}
-          <StackNavigator />
+
+          
+           <StackNavigator />
           {/*<Preloader />*/}
         </KeyboardAvoidingView>
       </AppProvider>
